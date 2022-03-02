@@ -43,3 +43,12 @@
 5. Click sobre "Review changes".
 6. Elegir la opción "Approve" (dentro de las opciones Comment/Approve/Request changes).
 7. Click sobre "Merge pull request" para combinar los cambios del PR con la rama principal.
+
+### Eliminar la rama de features despues de realizarse el merge a la rama principal
+
+1. Dentro del repositorio ir a Settings > Sección Pull Request
+2. Marcar la casilla "Automatically delete head branches"  
+   
+         Por ejemplo, la rama rod/Create-preference-model se elimina del repositorio luego del merge con main
+         Se configura de esta forma para que no quede una rama por cada feature mergeado en el repositorio
+         
