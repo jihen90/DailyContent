@@ -25,3 +25,6 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+# Ignore pull request instructions for
+pull_request_instructions.md
