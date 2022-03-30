@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_13_054956) do
+ActiveRecord::Schema.define(version: 2022_03_23_235651) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,10 @@ ActiveRecord::Schema.define(version: 2022_03_13_054956) do
     t.string "type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "preference_id"
+    t.bigint "myspace_id"
+    t.index ["myspace_id"], name: "index_contents_on_myspace_id"
+    t.index ["preference_id"], name: "index_contents_on_preference_id"
   end
 
   create_table "myspaces", force: :cascade do |t|
@@ -26,12 +30,18 @@ ActiveRecord::Schema.define(version: 2022_03_13_054956) do
     t.string "theme"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_myspaces_on_user_id"
   end
 
   create_table "preferences", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.bigint "preference_id"
+    t.index ["preference_id"], name: "index_preferences_on_preference_id"
+    t.index ["user_id"], name: "index_preferences_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -50,4 +60,9 @@ ActiveRecord::Schema.define(version: 2022_03_13_054956) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "contents", "myspaces"
+  add_foreign_key "contents", "preferences"
+  add_foreign_key "myspaces", "users"
+  add_foreign_key "preferences", "preferences"
+  add_foreign_key "preferences", "users"
 end
